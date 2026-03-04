@@ -15,11 +15,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
-if DEBUG == "False":
-    DEBUG = False
-else:
-    DEBUG = True
+DEBUG = bool(env("DEBUG"))
 
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
@@ -78,10 +74,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env("DB_NAME"),    # The name of the database you created
+        'USER': env("DB_USERNAME"),        # The PostgreSQL username
+        'PASSWORD': env("DB_PASSWORD"), # The user's password
+        'HOST': env("DB_HOST"),     # 'localhost' for local development
+        'PORT': env("DB_PORT"),          # The default PostgreSQL port
     }
 }
 
