@@ -34,13 +34,17 @@ INSTALLED_APPS = [
     # my apps
     'apps.users',
     'apps.utils',
+    'apps.book',
 
     # installed apps
+    'corsheaders',
     'rest_framework_simplejwt',
     'rest_framework',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # eng yuqoriga qo'ying
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -163,6 +167,12 @@ SIMPLE_JWT = {
     "CHECK_REVOKE_TOKEN": False,
     "REVOKE_TOKEN_CLAIM": "hash_password",
     "CHECK_USER_IS_ACTIVE": True,
+}
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'http://elasticsearch:9200',
+    }
 }
 
 # Internationalization

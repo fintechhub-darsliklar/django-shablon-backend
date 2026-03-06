@@ -9,6 +9,10 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - elasticsearch
+    
+    networks:
+     - elastic-net
 
   db:
     image: postgres:18
@@ -16,6 +20,38 @@ services:
       POSTGRES_DB: ${DB_USERNAME}
       POSTGRES_USER: ${DB_PASSWORD}
       POSTGRES_PASSWORD: ${DB_NAME}
+
+    networks:
+     - elastic-net
     
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.2 # Use a specific version, 'latest' is not supported
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      # Run as single-node for development
+      - discovery.type=single-node
+      # Set security configurations
+      - xpack.security.enabled=false # Set to true for production with authentication
+      # Allocate memory (adjust as needed)
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g" 
+    volumes:
+      - esdata:/usr/share/elasticsearch/data # Persist data in a named volume
+    networks:
+      - elastic-net
+    mem_limit: 2g # Set a memory limit for the container
+    # ulimits are recommended for production
+    # ulimits:
+    #   memlock:
+    #     soft: -1
+    #     hard: -1
     
-  
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  elastic-net:
+    driver: bridge
