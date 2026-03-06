@@ -1,7 +1,3 @@
-Albatta! Sizning Django loyihangiz uchun `README.md` faylini professional va tushunarli tarzda tuzib bera olaman. Siz aytganingizdek, loyiha **Django REST Framework**, **PostgreSQL**, va **Elasticsearch** ishlatadi, va sizda ikkita natija rasm (`result.png` va `result-api.png`) mavjud. Quyida misol keltiraman:
-
----
-
 # BACKEND-PROJECT-WITH-DJANGO
 
 Bu loyiha Django REST Framework yordamida backend API yaratish, **PostgreSQL** ma'lumotlar bazasi bilan ishlash, va **Elasticsearch** orqali qidiruvni amalga oshirish uchun mo‘ljallangan.
