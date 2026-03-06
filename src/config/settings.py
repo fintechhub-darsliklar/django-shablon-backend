@@ -24,6 +24,7 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'apps.book',
 
     # installed apps
+    'import_export',
     'corsheaders',
     'rest_framework_simplejwt',
     'rest_framework',
